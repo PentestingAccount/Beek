@@ -13,6 +13,7 @@ trap ctrl_c INT
 
 function ctrl_c(){
     echo -e "\n${yellowColour}[]${endColour}${grayColour}Saliendo${endColour}"
+    rm /tmp/port.tmp
     exit 0
 }
 
@@ -39,8 +40,8 @@ then
 	echo -e "${turquoiseColour}Example: ${endColour}"
 	echo -e "${yellowColour}./beek.sh 10.10.10.10${endColour}"
 else
-	for port in {1..65536}; do
-        	timeout 1 bash -c "echo >/dev/tcp/$1/$port" >& /dev/null \ && echo -e "${redColour}[${endredColour}${yellowColour}*${endyellowColour}${redColour}] $1:$port ${yellowColour}OPEN${endColour}" |tee -a /tmp/port.tmp &
+	for port in {1..10000}; do
+        	timeout 1 bash -c "echo >/dev/tcp/$1/$port" >& /dev/null \ && echo -e "${redColour}[${endColour}${yellowColour}*${endColour}${redColour}]${endColour} $1:$port OPEN" |tee -a /tmp/port.tmp &
 	done;
-	cat /tmp/port.tmp |  cut -d ':' -f 2 |  sed 's/is open//' | tr "\n" "," |tr -d " "| xclip -sel clip && rm /tmp/port.tmp
+	cat /tmp/port.tmp |  cut -d ':' -f 2 |  sed 's/OPEN//' | tr "\n" "," |tr -d " "| xclip -sel clip && rm /tmp/port.tmp
 fi
