@@ -1,4 +1,4 @@
-https://imgur.com/a/WFene3E
+https://i.imgur.com/XY27Gmm.png
 # Beek
 Scan Ports with this easy program
 Top 10,000 ports
